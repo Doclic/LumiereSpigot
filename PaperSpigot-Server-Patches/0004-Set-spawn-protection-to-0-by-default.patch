@@ -1,0 +1,35 @@
+From ed32f5abecbad61af23aeb704c64c07d2d66b489 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 21:02:55 +0200
+Subject: [PATCH] Set spawn-protection to 0 by default
+
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 8fd58e70c..3556445ee 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1463,7 +1463,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
+     }
+ 
+     public int getSpawnProtection() {
+-        return 16;
++        return 0;
+     }
+ 
+     public boolean a(World world, BlockPosition blockposition, EntityHuman entityhuman) {
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 8112d0a75..345bce66c 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -1205,7 +1205,7 @@ public final class CraftServer implements Server {
+ 
+     @Override
+     public int getSpawnRadius() {
+-        return ((DedicatedServer) console).propertyManager.getInt("spawn-protection", 16);
++        return ((DedicatedServer) console).propertyManager.getInt("spawn-protection", 0);
+     }
+ 
+     @Override
+-- 
+2.34.1
+
