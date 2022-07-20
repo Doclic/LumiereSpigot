@@ -48,3 +48,7 @@ echo
 echo "Applying PaperSpigot patches to Spigot-Server and Spigot-API"
 echo
 applyPatch Spigot-API PaperSpigot-API && applyPatch Spigot-Server PaperSpigot-Server
+echo
+echo "Applying LumiereSpigot patches to PaperSpigot-Server and PaperSpigot-API"
+echo
+applyPatch PaperSpigot-API LumiereSpigot-API && applyPatch PaperSpigot-Server LumiereSpigot-Server

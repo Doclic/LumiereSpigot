@@ -1,0 +1,45 @@
+From 69827d5b2837c1921d7f961a9f04fdd21b98c3ca Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 06:08:22 +0200
+Subject: [PATCH] POM Changes
+
+
+diff --git a/pom.xml b/pom.xml
+index fe9d6d26..06353065 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -4,17 +4,17 @@
+     <modelVersion>4.0.0</modelVersion>
+ 
+     <parent>
+-        <groupId>org.github.paperspigot</groupId>
+-        <artifactId>paperspigot-parent</artifactId>
++        <groupId>me.doclic</groupId>
++        <artifactId>lumierespigot-parent</artifactId>
+         <version>dev-SNAPSHOT</version>
+     </parent>
+ 
+-    <groupId>org.github.paperspigot</groupId>
+-    <artifactId>paperspigot-api</artifactId>
++    <groupId>me.doclic</groupId>
++    <artifactId>lumierespigot-api</artifactId>
+     <version>1.8.8-R0.1-SNAPSHOT</version>
+     <packaging>jar</packaging>
+ 
+-    <name>PaperSpigot-API</name>
++    <name>LumiereSpigot-API</name>
+     <url>https://hub.spigotmc.org/stash/projects/PAPER/</url>
+     <description>An enhanced plugin API for Minecraft servers.</description>
+ 
+@@ -78,7 +78,7 @@
+         <dependency>
+             <groupId>com.google.code.gson</groupId>
+             <artifactId>gson</artifactId>
+-          <version>2.2.4</version>
++            <version>2.2.4</version>
+         </dependency>
+         <dependency>
+             <groupId>org.avaje</groupId>
+-- 
+2.34.1
+

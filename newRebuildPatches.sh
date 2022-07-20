@@ -38,5 +38,7 @@ function savePatches {
 if [ "$1" == "clean" ]; then
 	rm -rf Spigot-*-Patches
 fi
-savePatches Spigot-API PaperSpigot-API
-savePatches Spigot-Server PaperSpigot-Server
+#savePatches Spigot-API PaperSpigot-API
+#savePatches Spigot-Server PaperSpigot-Server
+savePatches PaperSpigot-API LumiereSpigot-API
+savePatches PaperSpigot-Server LumiereSpigot-Server

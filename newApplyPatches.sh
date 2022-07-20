@@ -37,3 +37,4 @@ function applyPatch {
 
 applyPatch Bukkit Spigot-API HEAD && applyPatch CraftBukkit Spigot-Server patched
 applyPatch Spigot-API PaperSpigot-API HEAD && applyPatch Spigot-Server PaperSpigot-Server HEAD
+applyPatch PaperSpigot-API LumiereSpigot-API HEAD && applyPatch PaperSpigot-Server LumiereSpigot-Server HEAD

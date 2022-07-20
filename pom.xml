@@ -33,15 +33,4 @@
             <url>https://repo.md-5.net/content/repositories/releases/</url>
         </repository>
     </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>destroystokyo-releases</id>
-            <url>https://repo.destroystokyo.com/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>destroystokyo-snapshots</id>
-            <url>https://repo.destroystokyo.com/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>

@@ -12,4 +12,4 @@ function update {
 
 update Bukkit
 update CraftBukkit
-
+update PaperSpigot
