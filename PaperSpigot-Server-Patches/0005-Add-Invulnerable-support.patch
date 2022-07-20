@@ -1,0 +1,51 @@
+From a1c372dde2546ab1b4169d5a9300fc3699a9bb50 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 22:22:47 +0200
+Subject: [PATCH] Add Invulnerable support
+
+
+diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
+index 2da303fee..5f3618152 100644
+--- a/src/main/java/net/minecraft/server/Entity.java
++++ b/src/main/java/net/minecraft/server/Entity.java
+@@ -1913,6 +1913,16 @@ public abstract class Entity implements ICommandListener {
+         return this.invulnerable && damagesource != DamageSource.OUT_OF_WORLD && !damagesource.u();
+     }
+ 
++    // LumiereSpigot Start
++    public boolean isInvulnerable() {
++        return this.invulnerable;
++    }
++
++    public void setInvulnerable(boolean flag) {
++        this.invulnerable = flag;
++    }
++    // LumiereSpigot End
++
+     public void m(Entity entity) {
+         this.setPositionRotation(entity.locX, entity.locY, entity.locZ, entity.yaw, entity.pitch);
+     }
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index 9f40667ee..dcfb1369c 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+@@ -478,6 +478,16 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+     }
+ 
+     // LumiereSpigot Start
++    @Override
++    public boolean isInvulnerable() {
++        return getHandle().isInvulnerable();
++    }
++
++    @Override
++    public void setInvulnerable(boolean flag) {
++        getHandle().setInvulnerable(flag);
++    }
++
+     @Override
+     public boolean isSilent() {
+         return getHandle().R();
+-- 
+2.34.1
+

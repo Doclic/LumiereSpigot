@@ -1,0 +1,42 @@
+From 089eb2374b8f0962a567b7cb33cb9def9213172c Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 22:22:37 +0200
+Subject: [PATCH] Add Invulnerable support
+
+
+diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index 688a1777..58304798 100644
+--- a/src/main/java/org/bukkit/entity/Entity.java
++++ b/src/main/java/org/bukkit/entity/Entity.java
+@@ -344,11 +344,28 @@ public interface Entity extends Metadatable, CommandSender {
+     public boolean isCustomNameVisible();
+ 
+     // LumiereSpigot Start
++    /**
++     * Sets whether the entity is invulnerable or not.
++     * <p>
++     * When an entity is invulnerable it can only be damaged by players in
++     * creative mode.
++     *
++     * @param flag if the entity is invulnerable
++     */
++    public void setInvulnerable(boolean flag);
++
++    /**
++     * Gets whether the entity is invulnerable or not.
++     *
++     * @return whether the entity is
++     */
++    public boolean isInvulnerable();
+     /**
+      * Gets whether the entity is silent or not.
+      *
+      * @return whether the entity is silent.
+      */
++
+     public boolean isSilent();
+ 
+     /**
+-- 
+2.34.1
+
