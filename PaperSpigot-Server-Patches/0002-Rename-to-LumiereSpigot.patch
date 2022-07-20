@@ -1,0 +1,82 @@
+From 2fce92397b90430134f6e45f03b2bb5f35a39cda Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 18:10:31 +0200
+Subject: [PATCH] Rename to LumiereSpigot
+
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index b400ce04d..8fd58e70c 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1084,7 +1084,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
+     }
+ 
+     public String getServerModName() {
+-        return "PaperSpigot"; // PaperSpigot - PaperSpigot > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "LumiereSpigot"; // LumiereSpigot - LumiereSpigot > // PaperSpigot - PaperSpigot > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
+     }
+ 
+     public CrashReport b(CrashReport crashreport) {
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 69485fa69..8112d0a75 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -127,7 +127,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
+ 
+ public final class CraftServer implements Server {
+     private static final Player[] EMPTY_PLAYER_ARRAY = new Player[0];
+-    private final String serverName = "CraftBukkit";
++    private final String serverName = "LumiereSpigot";
+     private final String serverVersion;
+     private final String bukkitVersion = Versioning.getBukkitVersion();
+     private final Logger logger = Logger.getLogger("Minecraft");
+diff --git a/src/main/java/org/spigotmc/Metrics.java b/src/main/java/org/spigotmc/Metrics.java
+index 558989ce7..be901b171 100644
+--- a/src/main/java/org/spigotmc/Metrics.java
++++ b/src/main/java/org/spigotmc/Metrics.java
+@@ -344,7 +344,7 @@ public class Metrics {
+      */
+     private void postPlugin(final boolean isPing) throws IOException {
+         // Server software specific section
+-        String pluginName = "PaperSpigot"; // PaperSpigot - We need some usage data
++        String pluginName = "LumiereSpigot"; // PaperSpigot - We need some usage data
+         boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if online mode is enabled
+         String pluginVersion = (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown";
+         String serverVersion = Bukkit.getVersion();
+diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
+index c8f619a7e..1f87757b6 100644
+--- a/src/main/java/org/spigotmc/WatchdogThread.java
++++ b/src/main/java/org/spigotmc/WatchdogThread.java
+@@ -19,7 +19,7 @@ public class WatchdogThread extends Thread
+ 
+     private WatchdogThread(long timeoutTime, boolean restart)
+     {
+-        super( "PaperSpigot Watchdog Thread" );
++        super( "LumiereSpigot Watchdog Thread" );
+         this.timeoutTime = timeoutTime;
+         this.restart = restart;
+     }
+@@ -56,9 +56,9 @@ public class WatchdogThread extends Thread
+             {
+                 Logger log = Bukkit.getServer().getLogger();
+                 log.log( Level.SEVERE, "The server has stopped responding!" );
+-                log.log( Level.SEVERE, "Please report this to PaperSpigot directly!" );
++                log.log( Level.SEVERE, "Please report this to LumiereSpigot directly!" );
+                 log.log( Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports" );
+-                log.log( Level.SEVERE, "PaperSpigot version: " + Bukkit.getServer().getVersion() );
++                log.log( Level.SEVERE, "LumiereSpigot version: " + Bukkit.getServer().getVersion() );
+                 //
+                 if(net.minecraft.server.World.haveWeSilencedAPhysicsCrash)
+                 {
+@@ -68,7 +68,7 @@ public class WatchdogThread extends Thread
+                 }
+                 //
+                 log.log( Level.SEVERE, "------------------------------" );
+-                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to PaperSpigot!):" );
++                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to LumiereSpigot!):" );
+                 dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().primaryThread.getId(), Integer.MAX_VALUE ), log );
+                 log.log( Level.SEVERE, "------------------------------" );
+                 //
+-- 
+2.34.1
+
