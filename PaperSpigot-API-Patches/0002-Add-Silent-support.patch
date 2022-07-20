@@ -1,0 +1,38 @@
+From 4537618434fa71dcd9d5159a3e6140facfb75727 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 19:46:00 +0200
+Subject: [PATCH] Add Silent support
+
+
+diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index 7fb08af4..688a1777 100644
+--- a/src/main/java/org/bukkit/entity/Entity.java
++++ b/src/main/java/org/bukkit/entity/Entity.java
+@@ -343,6 +343,24 @@ public interface Entity extends Metadatable, CommandSender {
+      */
+     public boolean isCustomNameVisible();
+ 
++    // LumiereSpigot Start
++    /**
++     * Gets whether the entity is silent or not.
++     *
++     * @return whether the entity is silent.
++     */
++    public boolean isSilent();
++
++    /**
++     * Sets whether the entity is silent or not.
++     * <p>
++     * When an entity is silent it will not produce any sound.
++     *
++     * @param flag if the entity is silent
++     */
++    public void setSilent(boolean flag);
++    // LumiereSpigot End
++
+     // Spigot Start
+     public class Spigot
+     {
+-- 
+2.34.1
+

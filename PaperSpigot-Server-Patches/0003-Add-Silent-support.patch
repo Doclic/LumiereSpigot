@@ -1,0 +1,32 @@
+From 48e7fdbab98e7b9fa77eef0fe7f293b10ed64a16 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 19:46:17 +0200
+Subject: [PATCH] Add Silent support
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index 4f9179908..9f40667ee 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+@@ -477,6 +477,18 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+         return getHandle().getCustomNameVisible();
+     }
+ 
++    // LumiereSpigot Start
++    @Override
++    public boolean isSilent() {
++        return getHandle().R();
++    }
++
++    @Override
++    public void setSilent(boolean flag) {
++        getHandle().b(flag);
++    }
++    // LumiereSpigot End
++
+     @Override
+     public void sendMessage(String message) {
+ 
+-- 
+2.34.1
+
