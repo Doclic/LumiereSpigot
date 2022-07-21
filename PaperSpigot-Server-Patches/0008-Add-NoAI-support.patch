@@ -1,0 +1,34 @@
+From 9b65de71fc309de4271059fcaa5e10d4b6a939b9 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 04:20:08 +0200
+Subject: [PATCH] Add NoAI support
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+index 3e3a04808..0be551615 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+@@ -463,6 +463,20 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+         return true;
+     }
+ 
++    // LumiereSpigot start
++    @Override
++    public void setAI(boolean ai) {
++        if (this.getHandle() instanceof EntityInsentient) {
++            ((EntityInsentient) this.getHandle()).k(!ai);
++        }
++    }
++
++    @Override
++    public boolean hasAI() {
++        return this.getHandle() instanceof EntityInsentient && !((EntityInsentient) this.getHandle()).ce();
++    }
++    // LumiereSpigot end
++
+     @Deprecated
+     public int _INVALID_getLastDamage() {
+         return NumberConversions.ceil(getLastDamage());
+-- 
+2.34.1
+

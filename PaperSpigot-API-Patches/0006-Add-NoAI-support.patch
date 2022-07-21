@@ -1,0 +1,38 @@
+From f214a83682efc4dd05dad25e467d647a09604fc4 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 04:19:56 +0200
+Subject: [PATCH] Add NoAI support
+
+
+diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
+index 48e25089..4c6e40b6 100644
+--- a/src/main/java/org/bukkit/entity/LivingEntity.java
++++ b/src/main/java/org/bukkit/entity/LivingEntity.java
+@@ -392,4 +392,24 @@ public interface LivingEntity extends Entity, Damageable, ProjectileSource {
+      * @return whether the operation was successful
+      */
+     public boolean setLeashHolder(Entity holder);
++
++    // LumiereSpigot start
++    /**
++     * Sets whether an entity will have AI.
++     *
++     * The entity will be completely unable to move if it has no AI.
++     *
++     * @param ai whether the mob will have AI or not.
++     */
++    void setAI(boolean ai);
++
++    /**
++     * Checks whether an entity has AI.
++     *
++     * The entity will be completely unable to move if it has no AI.
++     *
++     * @return true if the entity has AI, otherwise false.
++     */
++    boolean hasAI();
++    // LumiereSpigot end
+ }
+-- 
+2.34.1
+
