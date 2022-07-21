@@ -1,0 +1,48 @@
+From 739cdee8c1331fdfba5b2f2f59b293564bc33998 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 02:49:51 +0200
+Subject: [PATCH] Add action bar API
+
+
+diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index d02fe560..f2aac3dd 100644
+--- a/src/main/java/org/bukkit/entity/Player.java
++++ b/src/main/java/org/bukkit/entity/Player.java
+@@ -1336,4 +1336,34 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
+ 
+     Spigot spigot();
+     // Spigot end
++
++    // LumiereSpigot start
++    /**
++     * Sends an Action Bar message to the client.
++     *
++     * Use Section symbols for legacy color codes to send formatting.
++     *
++     * @param message The message to send
++     */
++    public void sendActionBar(String message);
++
++    /**
++     * Sends an Action Bar message to the client.
++     *
++     * Use supplied alternative character to the section symbol to represent legacy color codes.
++     *
++     * @param alternateChar Alternate symbol such as '&'
++     * @param message The message to send
++     */
++    public void sendActionBar(char alternateChar, String message);
++
++    /**
++     * Sends an Action Bar message to the client.
++     *
++     * @param message The components to send
++     *
++     * @apiNote While 1.8.8 supports receiving action bars formatted with JSON, only {@link ChatColor} will actually change the formatting.
++     */
++    public void sendActionBar(net.md_5.bungee.api.chat.BaseComponent... message);
++    // LumiereSpigot end
+ }
+-- 
+2.34.1
+
