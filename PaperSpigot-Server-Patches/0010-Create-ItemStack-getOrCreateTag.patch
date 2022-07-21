@@ -1,0 +1,30 @@
+From 30fee40018115d5ad11e3fdc8208a111c8a799c4 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 14:13:33 +0200
+Subject: [PATCH] Create ItemStack#getOrCreateTag()
+
+
+diff --git a/src/main/java/net/minecraft/server/ItemStack.java b/src/main/java/net/minecraft/server/ItemStack.java
+index 015ce2834..d49afb967 100644
+--- a/src/main/java/net/minecraft/server/ItemStack.java
++++ b/src/main/java/net/minecraft/server/ItemStack.java
+@@ -534,6 +534,16 @@ public final class ItemStack {
+         return this.tag;
+     }
+ 
++    // LumiereSpigot start
++    public NBTTagCompound getOrCreateTag() {
++        if (this.tag == null) {
++            this.setTag(new NBTTagCompound());
++        }
++
++        return this.tag;
++    }
++    // LumiereSpigot end
++
+     public NBTTagCompound a(String s, boolean flag) {
+         if (this.tag != null && this.tag.hasKeyOfType(s, 10)) {
+             return this.tag.getCompound(s);
+-- 
+2.34.1
+
