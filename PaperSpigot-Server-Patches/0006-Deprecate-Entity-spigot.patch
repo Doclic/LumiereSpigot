@@ -1,0 +1,29 @@
+From 5d6587c54538d3055b9ba471ed90997d51806efe Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 22:45:02 +0200
+Subject: [PATCH] Deprecate Entity#spigot()
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index dcfb1369c..9f7f3a064 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+@@ -580,6 +580,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+     }
+ 
+     // Spigot start
++    @Deprecated // LumiereSpigot - Deprecate Entity#spigot()
+     private final Spigot spigot = new Spigot()
+     {
+         @Override
+@@ -589,6 +590,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+         }
+     };
+ 
++    @Deprecated // LumiereSpigot - Deprecate Entity#spigot()
+     public Spigot spigot()
+     {
+         return spigot;
+-- 
+2.34.1
+

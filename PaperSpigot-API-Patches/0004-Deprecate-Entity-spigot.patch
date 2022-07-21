@@ -1,0 +1,39 @@
+From 9c2ec61ee39abfbf852f08469742445bcfc35191 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Wed, 20 Jul 2022 22:45:55 +0200
+Subject: [PATCH] Deprecate Entity#spigot()
+
+
+diff --git a/src/main/java/org/bukkit/entity/Entity.java b/src/main/java/org/bukkit/entity/Entity.java
+index 58304798..ef96a15d 100644
+--- a/src/main/java/org/bukkit/entity/Entity.java
++++ b/src/main/java/org/bukkit/entity/Entity.java
+@@ -379,6 +379,12 @@ public interface Entity extends Metadatable, CommandSender {
+     // LumiereSpigot End
+ 
+     // Spigot Start
++    // LumiereSpigot start
++    /**
++     * @deprecated Use {@link #isInvulnerable()} instead
++     */
++    @Deprecated
++    // LumiereSpigot end
+     public class Spigot
+     {
+ 
+@@ -393,6 +399,12 @@ public interface Entity extends Metadatable, CommandSender {
+         }
+     }
+ 
++    // LumiereSpigot start
++    /**
++     * @deprecated Use {@link #isInvulnerable()} instead
++     */
++    @Deprecated
++    // LumiereSpigot end
+     Spigot spigot();
+     // Spigot End
+ }
+-- 
+2.34.1
+
