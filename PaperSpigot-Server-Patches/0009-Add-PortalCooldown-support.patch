@@ -1,0 +1,30 @@
+From d454e26f44c96c3c71b62e4be66fa33d5b45fc2a Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 04:44:58 +0200
+Subject: [PATCH] Add PortalCooldown support
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+index 9f7f3a064..d2fe284f7 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
+@@ -497,6 +497,16 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+     public void setSilent(boolean flag) {
+         getHandle().b(flag);
+     }
++
++    @Override
++    public int getPortalCooldown() {
++        return getHandle().portalCooldown;
++    }
++
++    @Override
++    public void setPortalCooldown(int cooldown) {
++        getHandle().portalCooldown = cooldown;
++    }
+     // LumiereSpigot End
+ 
+     @Override
+-- 
+2.34.1
+
