@@ -1,0 +1,49 @@
+From a0919796a823dc39d4b14f527741e52765eca8cf Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 15:05:20 +0200
+Subject: [PATCH] Port - Enforce cooldowns on book edits
+
+
+diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 4391ad7e7..46ccc8b66 100644
+--- a/src/main/java/net/minecraft/server/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/PlayerConnection.java
+@@ -104,6 +104,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
+     private final org.bukkit.craftbukkit.CraftServer server;
+     private int lastTick = MinecraftServer.currentTick;
+     private int lastDropTick = MinecraftServer.currentTick;
++    private int lastBookTick = MinecraftServer.currentTick; // Spigot
+     private int dropCount = 0;
+     private static final int SURVIVAL_PLACE_DISTANCE_SQUARED = 6 * 6;
+     private static final int CREATIVE_PLACE_DISTANCE_SQUARED = 7 * 7;
+@@ -1976,6 +1977,13 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
+ 
+         try { // CraftBukkit
+         if ("MC|BEdit".equals(packetplayincustompayload.a())) {
++            // Spigot start
++            if (this.lastBookTick + 20 > MinecraftServer.currentTick) {
++                this.disconnect("Book edited too quickly! (Attempted server crash?)");
++                return;
++            }
++            this.lastBookTick = MinecraftServer.currentTick;
++            // Spigot end
+             packetdataserializer = new PacketDataSerializer(Unpooled.wrappedBuffer(packetplayincustompayload.b()));
+ 
+             try {
+@@ -2008,6 +2016,13 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
+ 
+             return;
+         } else if ("MC|BSign".equals(packetplayincustompayload.a())) {
++            // Spigot start
++            if (this.lastBookTick + 20 > MinecraftServer.currentTick) {
++                this.disconnect("Book edited too quickly! (Attempted server crash?)");
++                return;
++            }
++            this.lastBookTick = MinecraftServer.currentTick; // LumiereSpigot
++            // Spigot end
+             packetdataserializer = new PacketDataSerializer(Unpooled.wrappedBuffer(packetplayincustompayload.b()));
+ 
+             try {
+-- 
+2.34.1
+
