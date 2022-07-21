@@ -1,0 +1,39 @@
+From 825326e5221f72424b9d385b6a95e72d0ae9b248 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 15:09:04 +0200
+Subject: [PATCH] Port - Enforce proper limits on books
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBook.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
+index 0b5ada011..273141fb6 100644
+--- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
++++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
+@@ -33,8 +33,11 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
+     static final ItemMetaKey BOOK_PAGES = new ItemMetaKey("pages");
+     static final ItemMetaKey RESOLVED = new ItemMetaKey("resolved");
+     static final ItemMetaKey GENERATION = new ItemMetaKey("generation");
+-    static final int MAX_PAGE_LENGTH = Short.MAX_VALUE; // TODO: Check me
+-    static final int MAX_TITLE_LENGTH = 0xffff;
++    // Spigot start
++    static final int MAX_PAGES = 50;
++    static final int MAX_PAGE_LENGTH = 256;
++    static final int MAX_TITLE_LENGTH = 16;
++    // Spigot end
+ 
+     protected String title;
+     protected String author;
+@@ -225,6 +228,11 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
+ 
+     public void addPage(final String... pages) {
+         for (String page : pages) {
++            // Spigot start
++            if (this.pages.size() >= MAX_PAGES) {
++                return;
++            }
++            // Spigot end
+             if (page == null) {
+                 page = "";
+             } else if (page.length() > MAX_PAGE_LENGTH) {
+-- 
+2.34.1
+
