@@ -1,0 +1,28 @@
+From e469c5f0476195dc419b96222fae22f529b13719 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 14:42:46 +0200
+Subject: [PATCH] Create World#getTypeIfLoaded(BlockPosition)
+
+
+diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
+index 8f3511f80..8abb59054 100644
+--- a/src/main/java/net/minecraft/server/World.java
++++ b/src/main/java/net/minecraft/server/World.java
+@@ -763,6 +763,14 @@ public abstract class World implements IBlockAccess {
+         return this.worldProvider.p()[this.getLightLevel(blockposition)];
+     }
+ 
++    // LumiereSpigot start
++    public IBlockData getTypeIfLoaded(BlockPosition blockposition) {
++        if (!isLoaded(blockposition)) return null;
++
++        return getType( blockposition, true );
++    }
++    // LumiereSpigot end
++
+     // Spigot start
+     public IBlockData getType(BlockPosition blockposition)
+     {
+-- 
+2.34.1
+
