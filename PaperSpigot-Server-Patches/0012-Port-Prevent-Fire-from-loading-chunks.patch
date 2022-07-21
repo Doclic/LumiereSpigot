@@ -1,0 +1,47 @@
+From 344b53de28d9f08c31cc6caf231c6e956e4f4769 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Thu, 21 Jul 2022 14:48:31 +0200
+Subject: [PATCH] Port - Prevent Fire from loading chunks
+
+
+diff --git a/src/main/java/net/minecraft/server/BlockFire.java b/src/main/java/net/minecraft/server/BlockFire.java
+index 76cd51296..b13cd6b03 100644
+--- a/src/main/java/net/minecraft/server/BlockFire.java
++++ b/src/main/java/net/minecraft/server/BlockFire.java
+@@ -176,6 +176,7 @@ public class BlockFire extends Block {
+                                 }
+ 
+                                 BlockPosition blockposition1 = blockposition.a(j, l, k);
++                                if (!world.isLoaded(blockposition1)) continue; // Paper
+                                 int j1 = this.m(world, blockposition1);
+ 
+                                 if (j1 > 0) {
+@@ -244,10 +245,12 @@ public class BlockFire extends Block {
+     }
+ 
+     private void a(World world, BlockPosition blockposition, int i, Random random, int j) {
+-        int k = this.c(world.getType(blockposition).getBlock());
++        final IBlockData iblockdata = world.getTypeIfLoaded(blockposition); // Paper
++        if (iblockdata == null) return; // Paper
++        int k = this.c(iblockdata.getBlock()); // Paper
+ 
+         if (random.nextInt(i) < k) {
+-            IBlockData iblockdata = world.getType(blockposition);
++            //IBlockData iblockdata = world.getType(blockposition); // Paper
+ 
+             // CraftBukkit start
+             org.bukkit.block.Block theBlock = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
+@@ -305,7 +308,9 @@ public class BlockFire extends Block {
+             for (int k = 0; k < j; ++k) {
+                 EnumDirection enumdirection = aenumdirection[k];
+ 
+-                i = Math.max(this.d(world.getType(blockposition.shift(enumdirection)).getBlock()), i);
++                final IBlockData type = world.getTypeIfLoaded(blockposition.shift(enumdirection)); // Paper
++                if (type == null) continue; // Paper
++                i = Math.max(this.d(type.getBlock()), i); // Paper
+             }
+ 
+             return i;
+-- 
+2.34.1
+
