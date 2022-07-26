@@ -1,0 +1,33 @@
+From b649ab56760a517f5b795ed085b9ae286dba70cf Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 15:32:10 +0200
+Subject: [PATCH] Add Invisible support
+
+
+diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
+index 4c6e40b6..170a0ca2 100644
+--- a/src/main/java/org/bukkit/entity/LivingEntity.java
++++ b/src/main/java/org/bukkit/entity/LivingEntity.java
+@@ -411,5 +411,19 @@ public interface LivingEntity extends Entity, Damageable, ProjectileSource {
+      * @return true if the entity has AI, otherwise false.
+      */
+     boolean hasAI();
++
++    /**
++     * Sets whether the entity is invisible or not.
++     *
++     * @param invisible If the entity is invisible
++     */
++    void setInvisible(boolean invisible);
++
++    /**
++     * Gets whether the entity is invisible or not.
++     *
++     * @return Whether the entity is invisible
++     */
++    boolean isInvisible();
+     // LumiereSpigot end
+ }
+-- 
+2.34.1
+

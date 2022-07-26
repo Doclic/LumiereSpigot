@@ -1,0 +1,30 @@
+From d54060962bd7db59474dc1b65094cf5d6dea170d Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 15:32:39 +0200
+Subject: [PATCH] Add Invisible support
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+index 0be551615..4608ca29f 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+@@ -475,6 +475,16 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+     public boolean hasAI() {
+         return this.getHandle() instanceof EntityInsentient && !((EntityInsentient) this.getHandle()).ce();
+     }
++
++    @Override
++    public boolean isInvisible() {
++        return getHandle().isInvisible();
++    }
++
++    @Override
++    public void setInvisible(boolean invisible) {
++        getHandle().setInvisible(invisible);
++    }
+     // LumiereSpigot end
+ 
+     @Deprecated
+-- 
+2.34.1
+
