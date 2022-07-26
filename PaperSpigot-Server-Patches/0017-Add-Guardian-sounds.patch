@@ -1,0 +1,42 @@
+From 4e3fab9a381a7ec0fb8e1409fb0a1126bb52711d Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 19:37:00 +0200
+Subject: [PATCH] Add Guardian sounds
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftSound.java b/src/main/java/org/bukkit/craftbukkit/CraftSound.java
+index 0cc8f9bab..4199a4289 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftSound.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftSound.java
+@@ -68,6 +68,11 @@ public class CraftSound {
+         set(COW_WALK, "mob.cow.step");
+         set(CREEPER_DEATH, "mob.creeper.death");
+         set(CREEPER_HISS, "mob.creeper.say");
++        // LumiereSpigot start
++        set(ELDER_GUARDIAN_IDLE, "mob.guardian.elder.idle");
++        set(ELDER_GUARDIAN_HIT, "mob.guardian.elder.hit");
++        set(ELDER_GUARDIAN_DEATH, "mob.guardian.elder.death");
++        // LumiereSpigot end
+         set(ENDERDRAGON_DEATH, "mob.enderdragon.end");
+         set(ENDERDRAGON_GROWL, "mob.enderdragon.growl");
+         set(ENDERDRAGON_HIT, "mob.enderdragon.hit");
+@@ -84,6 +89,16 @@ public class CraftSound {
+         set(GHAST_FIREBALL, "mob.ghast.fireball");
+         set(GHAST_MOAN, "mob.ghast.moan");
+         set(GHAST_SCREAM, "mob.ghast.scream");
++        // LumiereSpigot start
++        set(GUARDIAN_IDLE, "mob.guardian.idle");
++        set(GUARDIAN_IDLE_LAND, "mob.guardian.land.idle");
++        set(GUARDIAN_HIT, "mob.guardian.hit");
++        set(GUARDIAN_HIT_LAND, "mob.guardian.land.hit");
++        set(GUARDIAN_DEATH, "mob.guardian.death");
++        set(GUARDIAN_DEATH_LAND, "mob.guardian.land.death");
++        set(GUARDIAN_FLOP, "mob.guardian.flop");
++        set(GUARDIAN_CURSE, "mob.guardian.curse");
++        // LumiereSpigot end
+         set(HORSE_ANGRY, "mob.horse.angry");
+         set(HORSE_ARMOR, "mob.horse.armor");
+         set(HORSE_BREATHE, "mob.horse.breathe");
+-- 
+2.34.1
+

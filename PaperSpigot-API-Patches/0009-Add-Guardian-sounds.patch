@@ -1,0 +1,32 @@
+From 3cf1df7bbe542f16189fd46e3815ca05da60b514 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 19:24:50 +0200
+Subject: [PATCH] Add Guardian sounds
+
+
+diff --git a/src/main/java/org/bukkit/Sound.java b/src/main/java/org/bukkit/Sound.java
+index 09135300..e8f1b1a7 100644
+--- a/src/main/java/org/bukkit/Sound.java
++++ b/src/main/java/org/bukkit/Sound.java
+@@ -208,4 +208,18 @@ public enum Sound {
+     VILLAGER_IDLE,
+     VILLAGER_NO,
+     VILLAGER_YES,
++
++    // LumiereSpigot start
++    GUARDIAN_IDLE,
++    GUARDIAN_IDLE_LAND,
++    GUARDIAN_HIT,
++    GUARDIAN_HIT_LAND,
++    GUARDIAN_DEATH,
++    GUARDIAN_DEATH_LAND,
++    GUARDIAN_FLOP,
++    GUARDIAN_CURSE,
++    ELDER_GUARDIAN_IDLE,
++    ELDER_GUARDIAN_HIT,
++    ELDER_GUARDIAN_DEATH,
++    // LumiereSpigot end
+ }
+-- 
+2.34.1
+
