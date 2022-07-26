@@ -1,0 +1,62 @@
+From 68f3e79c53be75114e1d718f13e94358cac312c3 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 20:46:08 +0200
+Subject: [PATCH] Make default permission message configurable
+
+
+diff --git a/src/main/java/me/doclic/lumierespigot/LumiereSpigotConfig.java b/src/main/java/me/doclic/lumierespigot/LumiereSpigotConfig.java
+index 315f05f54..68a080eea 100644
+--- a/src/main/java/me/doclic/lumierespigot/LumiereSpigotConfig.java
++++ b/src/main/java/me/doclic/lumierespigot/LumiereSpigotConfig.java
+@@ -2,6 +2,7 @@ package me.doclic.lumierespigot;
+ 
+ import com.google.common.base.Throwables;
+ import org.bukkit.Bukkit;
++import org.bukkit.ChatColor;
+ import org.bukkit.command.Command;
+ import org.bukkit.configuration.InvalidConfigurationException;
+ import org.bukkit.configuration.file.YamlConfiguration;
+@@ -133,6 +134,13 @@ public class LumiereSpigotConfig {
+         return config.getString( path, config.getString( path ) );
+     }
+ 
+-
++    public static String permissionMessage;
++    private static void permissionMessage()
++    {
++        permissionMessage = getString("permission-message",
++                ChatColor.RED + "I'm sorry, but you do not have permission to perform this command. " +
++                        "Please contact the server administrators if you believe that this is in error.");
++        Bukkit.getLogger().info( "Missing permission message: " + permissionMessage );
++    }
+ 
+ }
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index bd73cbbe1..620cd712b 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
+ 
+ import javax.imageio.ImageIO;
+ 
++import me.doclic.lumierespigot.LumiereSpigotConfig;
+ import net.minecraft.server.*;
+ 
+ import org.bukkit.BanList;
+@@ -1770,6 +1771,13 @@ public final class CraftServer implements Server {
+         return CraftMagicNumbers.INSTANCE;
+     }
+ 
++    // LumiereSpigot start
++    @Override
++    public String getDefaultPermissionMessage() {
++        return LumiereSpigotConfig.permissionMessage;
++    }
++    // LumiereSpigot end
++
+     private final Spigot spigot = new Spigot()
+     {
+ 
+-- 
+2.34.1
+

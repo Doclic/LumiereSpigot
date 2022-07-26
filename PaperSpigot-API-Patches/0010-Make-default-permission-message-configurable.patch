@@ -1,0 +1,60 @@
+From 2e6c82622dc8b268adcee8eb835c812006eb7d57 Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 20:28:38 +0200
+Subject: [PATCH] Make default permission message configurable
+
+
+diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index 8fbc8283..fa7f9957 100644
+--- a/src/main/java/org/bukkit/Bukkit.java
++++ b/src/main/java/org/bukkit/Bukkit.java
+@@ -1162,6 +1162,15 @@ public final class Bukkit {
+     }
+     // Paper end
+ 
++    // LumiereSpigot start
++    /**
++     * @return the permission message used by the default Bukkit/Spigot commands
++     */
++    public static String getDefaultPermissionMessage() {
++        return server.getDefaultPermissionMessage();
++    }
++    // LumiereSpigot end
++
+     public static Server.Spigot spigot()
+     {
+         return server.spigot();
+diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 1b62463a..d3400db2 100644
+--- a/src/main/java/org/bukkit/Server.java
++++ b/src/main/java/org/bukkit/Server.java
+@@ -950,6 +950,13 @@ public interface Server extends PluginMessageRecipient {
+     CommandMap getCommandMap();
+     // Paper end
+ 
++    // LumiereSpigot start
++    /**
++     * @return the permission message used by the default Bukkit/Spigot commands
++     */
++    String getDefaultPermissionMessage();
++    // LumiereSpigot end
++
+     public class Spigot
+     {
+         @Deprecated
+diff --git a/src/main/java/org/bukkit/command/Command.java b/src/main/java/org/bukkit/command/Command.java
+index c126a1e7..04853bd4 100644
+--- a/src/main/java/org/bukkit/command/Command.java
++++ b/src/main/java/org/bukkit/command/Command.java
+@@ -198,7 +198,7 @@ public abstract class Command {
+         }
+ 
+         if (permissionMessage == null) {
+-            target.sendMessage(ChatColor.RED + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.");
++            target.sendMessage(Bukkit.getDefaultPermissionMessage()); // LumiereSpigot - Configurable permission message
+         } else if (permissionMessage.length() != 0) {
+             for (String line : permissionMessage.replace("<permission>", permission).split("\n")) {
+                 target.sendMessage(line);
+-- 
+2.34.1
+
