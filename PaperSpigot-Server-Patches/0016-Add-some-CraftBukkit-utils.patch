@@ -1,0 +1,136 @@
+From 9a27bd8dba9ea6cfb7bf53f0e537ffbf7b3d9d8a Mon Sep 17 00:00:00 2001
+From: Doclic <doclicwastaken@gmail.com>
+Date: Tue, 26 Jul 2022 19:06:15 +0200
+Subject: [PATCH] Add some CraftBukkit utils
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/configuration/ConfigSerializationUtil.java b/src/main/java/org/bukkit/craftbukkit/configuration/ConfigSerializationUtil.java
+new file mode 100644
+index 000000000..130277f04
+--- /dev/null
++++ b/src/main/java/org/bukkit/craftbukkit/configuration/ConfigSerializationUtil.java
+@@ -0,0 +1,39 @@
++package org.bukkit.craftbukkit.configuration;
++
++import java.util.Map;
++import java.util.NoSuchElementException;
++import java.util.UUID;
++import org.bukkit.configuration.serialization.ConfigurationSerializable;
++
++/**
++ * Utilities related to the serialization and deserialization of {@link ConfigurationSerializable}s.
++ */
++public final class ConfigSerializationUtil {
++
++    public static String getString(Map<?, ?> map, String key, boolean nullable) {
++        return getObject(String.class, map, key, nullable);
++    }
++
++    public static UUID getUuid(Map<?, ?> map, String key, boolean nullable) {
++        String uuidString = ConfigSerializationUtil.getString(map, key, nullable);
++        if (uuidString == null) return null;
++        return UUID.fromString(uuidString);
++    }
++
++    public static <T> T getObject(Class<T> clazz, Map<?, ?> map, String key, boolean nullable) {
++        final Object object = map.get(key);
++        if (clazz.isInstance(object)) {
++            return clazz.cast(object);
++        }
++        if (object == null) {
++            if (!nullable) {
++                throw new NoSuchElementException(map + " does not contain " + key);
++            }
++            return null;
++        }
++        throw new IllegalArgumentException(key + "(" + object + ") is not a valid " + clazz);
++    }
++
++    private ConfigSerializationUtil() {
++    }
++}
+\ No newline at end of file
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftVector.java b/src/main/java/org/bukkit/craftbukkit/util/CraftVector.java
+new file mode 100644
+index 000000000..1eb0fad60
+--- /dev/null
++++ b/src/main/java/org/bukkit/craftbukkit/util/CraftVector.java
+@@ -0,0 +1,18 @@
++package org.bukkit.craftbukkit.util;
++
++import net.minecraft.server.Vec3D;
++import org.bukkit.util.Vector;
++
++public final class CraftVector {
++
++    private CraftVector() {
++    }
++
++    public static Vector toBukkit(Vec3D nms) {
++        return new Vector(nms.a, nms.b, nms.c);
++    }
++
++    public static Vec3D toNMS(Vector bukkit) {
++        return new Vec3D(bukkit.getX(), bukkit.getY(), bukkit.getZ());
++    }
++}
+\ No newline at end of file
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/JsonHelper.java b/src/main/java/org/bukkit/craftbukkit/util/JsonHelper.java
+new file mode 100644
+index 000000000..751241e0f
+--- /dev/null
++++ b/src/main/java/org/bukkit/craftbukkit/util/JsonHelper.java
+@@ -0,0 +1,49 @@
++package org.bukkit.craftbukkit.util;
++
++import com.google.gson.JsonElement;
++import com.google.gson.JsonObject;
++import com.google.gson.JsonPrimitive;
++import javax.annotation.Nonnull;
++import javax.annotation.Nullable;
++
++public final class JsonHelper {
++
++    @Nullable
++    public static JsonObject getObjectOrNull(@Nonnull JsonObject parent, @Nonnull String key) {
++        JsonElement element = parent.get(key);
++        return (element instanceof JsonObject) ? (JsonObject) element : null;
++    }
++
++    @Nonnull
++    public static JsonObject getOrCreateObject(@Nonnull JsonObject parent, @Nonnull String key) {
++        JsonObject jsonObject = getObjectOrNull(parent, key);
++        if (jsonObject == null) {
++            jsonObject = new JsonObject();
++            parent.add(key, jsonObject);
++        }
++        return jsonObject;
++    }
++
++    @Nullable
++    public static JsonPrimitive getPrimitiveOrNull(@Nonnull JsonObject parent, @Nonnull String key) {
++        JsonElement element = parent.get(key);
++        return (element instanceof JsonPrimitive) ? (JsonPrimitive) element : null;
++    }
++
++    @Nullable
++    public static String getStringOrNull(JsonObject parent, String key) {
++        JsonPrimitive primitive = getPrimitiveOrNull(parent, key);
++        return (primitive != null) ? primitive.getAsString() : null;
++    }
++
++    public static void setOrRemove(@Nonnull JsonObject parent, @Nonnull String key, @Nullable JsonElement value) {
++        if (value == null) {
++            parent.remove(key);
++        } else {
++            parent.add(key, value);
++        }
++    }
++
++    private JsonHelper() {
++    }
++}
+\ No newline at end of file
+-- 
+2.34.1
+
